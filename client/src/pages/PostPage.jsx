@@ -8,7 +8,7 @@ function PostPage () {
   const [postInfo, setPostInfo] = useState(null)
   const { userInfo } = useContext(UserContext)
   useEffect(() => {
-    fetch(`http://localhost:4000/post/${id}`).then(res => {
+    fetch(`https://mern-vercel-api-self.vercel.app/post/${id}`).then(res => {
       res.json().then(postInfo => {
         setPostInfo(postInfo)
       })
@@ -43,7 +43,7 @@ function PostPage () {
         </div>
       )}
       <div className='image'>
-        <img src={`http://localhost:4000/${postInfo.cover}`} alt='' />
+        <img src={`https://mern-vercel-api-self.vercel.app/${postInfo.cover}`} alt='' />
       </div>
       <div
         className='content'

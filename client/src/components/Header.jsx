@@ -5,7 +5,7 @@ import { UserContext } from '../UserContext'
 function Header () {
   const { setuserInfo, userInfo } = useContext(UserContext)
   useEffect(() => {
-    fetch('http://localhost:4000/profile', {
+    fetch('https://mern-vercel-api-self.vercel.app/profile', {
       credentials: 'include'
     }).then(res => {
       res.json().then(userInfo => {
@@ -15,7 +15,7 @@ function Header () {
   }, [])
 
   function logout () {
-    const response = fetch('http://localhost:4000/logout', {
+    const response = fetch('https://mern-vercel-api-self.vercel.app/logout', {
       credentials: 'include',
       method: 'POST'
     })
