@@ -16,7 +16,7 @@ env.config();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://mern-vercel-front-end.vercel.app"],
     methods: ["POST", "GET", "PUT"],
     credentials: true,
   })
