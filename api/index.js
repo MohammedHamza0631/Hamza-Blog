@@ -28,6 +28,7 @@ mongoose.connect(process.env.MONGO_URL);
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 const secret = process.env.SECRET;
+const PORT = process.env.PORT || 4000;
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -152,4 +153,6 @@ app.get("/post/:id", async (req, res) => {
   res.json(postDoc);
 });
 
-app.listen(4000);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
