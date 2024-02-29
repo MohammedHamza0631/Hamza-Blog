@@ -12,7 +12,7 @@
     "nodemon": "^3.0.3",
     "touch": "^3.1.0"
   },
-  "name": "api",
+  "name": "server",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
