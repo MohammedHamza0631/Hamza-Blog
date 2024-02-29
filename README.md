@@ -9,24 +9,28 @@
 ## Cloning the project:
 You can clone the project by running the following command in the terminal:
 
-```git clone https://github.com/MohammedHamza0631/MERN-Blog.git```.
+```
+git clone https://github.com/MohammedHamza0631/MERN-Blog.git
+```
 
 ## Running the project on Local Machine:
 - Clone the repository into a folder, say **my-blog**.
 - Navigate to the project folder:
   
-    ```cd my-blog```
+    ```
+    cd my-blog
+    ```
 - open the terminal and go to client folder and start the client side:
   
  ```
   cd client
-  npm install (To install all the dependencies)
+  npm install 
   npm start 
  ```
 - open another terminal and go to server folder and start the server side:
 
 ```
   cd server
-  npm install (To install all the dependencies)
+  npm install 
   nodemon index.js
 ```
