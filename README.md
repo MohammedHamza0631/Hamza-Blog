@@ -51,3 +51,4 @@ git clone https://github.com/MohammedHamza0631/MERN-Blog.git
   ```
   nodemon index.js
   ```
+- if not redirected then visit http://localhost:3000 to view the website in Live action.
