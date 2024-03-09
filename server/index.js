@@ -51,10 +51,14 @@ app.post("/login", async (req, res) => {
     // logged in
     jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
       if (err) throw err;
-      res.cookie("token", token).json({
-        id: userDoc._id,
-        username,
-      });
+      res
+        .cookie("token", token, {
+          expires: new Date(Date.now() + 24 * 3600000), // cookie will be removed after 8 hours
+        })
+        .json({
+          id: userDoc._id,
+          username,
+        });
     });
     console.log("Login Success");
   } else {
