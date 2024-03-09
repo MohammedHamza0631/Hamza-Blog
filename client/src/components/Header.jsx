@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, Navigate, redirect } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { UserContext } from '../UserContext'
 
 function Header () {
@@ -15,12 +15,13 @@ function Header () {
   }, [])
 
   function logout () {
-    const response = fetch('/logout', {
+    fetch('/logout', {
       credentials: 'include',
       method: 'POST'
+    }).then(() => {
+      setuserInfo(null)
+      window.location.replace('/')
     })
-
-    setuserInfo(null)
   }
 
   const username = userInfo?.username

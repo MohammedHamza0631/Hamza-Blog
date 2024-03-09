@@ -72,9 +72,8 @@ app.get("/profile", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  res.cookie("token", "").json("ok");
-
-  console.log("Logout success");
+  res.clearCookie("token").json("Logged out");
+  console.log("Logged out");
 });
 
 app.post("/post", upload.single("file"), async (req, res) => {
@@ -153,6 +152,23 @@ app.get("/post/:id", async (req, res) => {
   res.json(postDoc);
 });
 
+app.delete("/post/:id", async (req, res) => {
+  const { id } = req.params;
+  const { token } = req.cookies;
+  if (!token) {
+    return res.status(404).json("You are not logged in");
+  }
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) throw err;
+    const postDoc = await Post.findById(id);
+    const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+    if (!isAuthor) {
+      return res.status(400).json("you are not the author");
+    }
+    await postDoc.deleteOne();
+    res.json(postDoc);
+  });
+});
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
