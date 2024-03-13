@@ -9,7 +9,7 @@ function PostPage () {
   const [redirectt, setRedirect] = useState(false)
   const { userInfo } = useContext(UserContext)
   useEffect(() => {
-    fetch(`http://localhost:4000/post/${id}`).then(res => {
+    fetch(`https://hamza-blog-server.onrender.com/post/${id}`).then(res => {
       res.json().then(postInfo => {
         setPostInfo(postInfo)
       })
@@ -53,10 +53,13 @@ function PostPage () {
             <Link
               className='delete-btn'
               onClick={() => {
-                fetch(`http://localhost:4000/post/${postInfo._id}`, {
-                  method: 'DELETE',
-                  credentials: 'include'
-                }).then(() => {
+                fetch(
+                  `https://hamza-blog-server.onrender.com/post/${postInfo._id}`,
+                  {
+                    method: 'DELETE',
+                    credentials: 'include'
+                  }
+                ).then(() => {
                   // window.location.replace('/')
                   setPostInfo(null)
                   setRedirect(true)
@@ -83,7 +86,10 @@ function PostPage () {
         </div>
       )}
       <div className='image'>
-        <img src={`http://localhost:4000/${postInfo.cover}`} alt='' />
+        <img
+          src={`https://hamza-blog-server.onrender.com/${postInfo.cover}`}
+          alt=''
+        />
       </div>
       <div
         className='content'

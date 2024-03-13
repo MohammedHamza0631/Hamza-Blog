@@ -15,12 +15,15 @@ const LoginPage = () => {
 
   async function login (e) {
     e.preventDefault()
-    const response = await fetch('http://localhost:4000/login', {
-      method: 'POST',
-      body: JSON.stringify({ username, password }),
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include'
-    })
+    const response = await fetch(
+      'https://hamza-blog-server.onrender.com/login',
+      {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+      }
+    )
     if (response.ok) {
       response.json().then(userInfo => {
         setuserInfo(userInfo)
