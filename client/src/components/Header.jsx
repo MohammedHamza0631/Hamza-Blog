@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../UserContext'
 
 function Header () {
-  const { setuserInfo, userInfo } = useContext(UserContext)
+  const { userInfo, setuserInfo } = useContext(UserContext)
   useEffect(() => {
-    fetch('/profile', {
+    fetch('http://localhost:4000/profile', {
       credentials: 'include'
     }).then(res => {
       res.json().then(userInfo => {
@@ -15,12 +15,12 @@ function Header () {
   }, [])
 
   function logout () {
-    fetch('/logout', {
+    fetch('http://localhost:4000/logout', {
       credentials: 'include',
       method: 'POST'
     }).then(() => {
-      setuserInfo(null)
       window.location.replace('/')
+      setuserInfo(null)
     })
   }
 

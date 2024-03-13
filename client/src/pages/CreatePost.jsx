@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import Editor from '../components/Editor'
 
@@ -8,6 +8,11 @@ function CreatePost () {
   const [content, setContent] = useState('')
   const [files, setFiles] = useState('')
   const [redirect, setRedirect] = useState(false)
+  const cursorRef = useRef()
+
+  useEffect(() => {
+    cursorRef.current.focus()
+  }, [])
 
   async function handleSubmit (e) {
     e.preventDefault()
@@ -17,7 +22,7 @@ function CreatePost () {
     data.set('content', content)
     data.set('file', files[0])
 
-    const response = await fetch('/post', {
+    const response = await fetch('http://localhost:4000/post', {
       method: 'POST',
       body: data,
       credentials: 'include'
@@ -38,6 +43,7 @@ function CreatePost () {
           placeholder='Title'
           value={title}
           onChange={e => setTitle(e.target.value)}
+          ref={cursorRef}
         />
         <input
           type='summary'

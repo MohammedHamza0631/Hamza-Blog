@@ -24,11 +24,25 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
-mongoose.connect(process.env.MONGO_URL);
+// mongoose.connect(process.env.MONGO_URL);
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
+
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 const secret = process.env.SECRET;
 const PORT = process.env.PORT || 4000;
+
+app.get("/healthz", (req, res) => {
+  res.status(200).json("Systems up & running");
+});
+
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -38,8 +52,12 @@ app.post("/register", async (req, res) => {
     });
     res.json(userDoc);
   } catch (e) {
-    console.log(e);
-    res.status(400).json(e);
+    if (e.code === 11000 && e.keyPattern && e.keyValue) {
+      res.status(400).json({ error: "Username already exists." });
+    } else {
+      console.error(e);
+      res.status(400).json({ error: "Failed to register user." });
+    }
   }
 });
 
@@ -147,9 +165,8 @@ app.get("/post", async (req, res) => {
       .limit(20)
   );
 });
-app.get("/healthz", (req, res) => {
-  res.status(200).json("Systems up & running");
-});
+
+
 app.get("/post/:id", async (req, res) => {
   const { id } = req.params;
   const postDoc = await Post.findById(id).populate("author", ["username"]);
@@ -173,6 +190,7 @@ app.delete("/post/:id", async (req, res) => {
     res.json(postDoc);
   });
 });
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

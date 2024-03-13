@@ -3,7 +3,7 @@ import Post from '../components/Post'
 const Homepage = () => {
   const [posts, setPosts] = useState([])
   useEffect(() => {
-    fetch('/post').then(res => {
+    fetch('http://localhost:4000/post').then(res => {
       res.json().then(posts => {
         setPosts(posts)
       })

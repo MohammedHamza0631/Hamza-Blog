@@ -6,22 +6,23 @@ import { UserContext } from '../UserContext'
 function PostPage () {
   const { id } = useParams()
   const [postInfo, setPostInfo] = useState(null)
-  const [redirect, setRedirect] = useState(false)
+  const [redirectt, setRedirect] = useState(false)
   const { userInfo } = useContext(UserContext)
   useEffect(() => {
-    fetch(`/post/${id}`).then(res => {
+    fetch(`http://localhost:4000/post/${id}`).then(res => {
       res.json().then(postInfo => {
         setPostInfo(postInfo)
       })
     })
   }, [id])
 
-  if (redirect) {
+  if (redirectt) {
     return <Navigate to={'/'} />
   }
   if (!postInfo) {
     return <div>Loading...</div>
   }
+
   return (
     <div className='post-page'>
       <h1>{postInfo.title}</h1>
@@ -52,13 +53,10 @@ function PostPage () {
             <Link
               className='delete-btn'
               onClick={() => {
-                fetch(
-                  `https://hamza-blog-server.onrender.com/post/${postInfo._id}`,
-                  {
-                    method: 'DELETE',
-                    credentials: 'include'
-                  }
-                ).then(() => {
+                fetch(`http://localhost:4000/post/${postInfo._id}`, {
+                  method: 'DELETE',
+                  credentials: 'include'
+                }).then(() => {
                   // window.location.replace('/')
                   setPostInfo(null)
                   setRedirect(true)
@@ -85,7 +83,7 @@ function PostPage () {
         </div>
       )}
       <div className='image'>
-        <img src={`/${postInfo.cover}`} alt='' />
+        <img src={`http://localhost:4000/${postInfo.cover}`} alt='' />
       </div>
       <div
         className='content'
