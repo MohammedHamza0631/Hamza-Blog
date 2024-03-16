@@ -27,7 +27,7 @@ function CreatePost () {
       {
         method: 'POST',
         body: data,
-        withCredentials: true
+        credentials: 'include'
       }
     )
     if (response.ok) {

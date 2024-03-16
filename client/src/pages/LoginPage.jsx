@@ -21,7 +21,7 @@ const LoginPage = () => {
         method: 'POST',
         body: JSON.stringify({ username, password }),
         headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
+        credentials: 'include'
       }
     )
     if (response.ok) {

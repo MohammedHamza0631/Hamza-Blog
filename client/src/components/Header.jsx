@@ -6,7 +6,7 @@ function Header () {
   const { userInfo, setuserInfo } = useContext(UserContext)
   useEffect(() => {
     fetch('https://hamza-blog-server.onrender.com/profile', {
-      withCredentials: true
+      credentials: 'include'
     }).then(res => {
       res.json().then(userInfo => {
         setuserInfo(userInfo)
@@ -16,7 +16,7 @@ function Header () {
 
   function logout () {
     fetch('https://hamza-blog-server.onrender.com/logout', {
-      withCredentials: true,
+      credentials: 'include',
       method: 'POST'
     }).then(() => {
       window.location.replace('/')
