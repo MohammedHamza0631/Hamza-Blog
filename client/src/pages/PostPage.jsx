@@ -57,7 +57,7 @@ function PostPage () {
                   `https://hamza-blog-server.onrender.com/post/${postInfo._id}`,
                   {
                     method: 'DELETE',
-                    credentials: 'include'
+                    withCredentials: true
                   }
                 ).then(() => {
                   // window.location.replace('/')

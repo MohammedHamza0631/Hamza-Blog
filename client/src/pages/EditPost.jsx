@@ -35,7 +35,7 @@ function EditPost () {
     await fetch('https://hamza-blog-server.onrender.com/post', {
       method: 'PUT',
       body: data,
-      credentials: 'include'
+      withCredentials: true
     })
     setRedirect(true)
   }
