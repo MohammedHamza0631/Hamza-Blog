@@ -1,5 +1,5 @@
 import React from 'react'
-import { format, formatISO9075 } from 'date-fns'
+import { formatISO9075 } from 'date-fns'
 import { Link } from 'react-router-dom'
 function Post ({ _id, title, summary, cover, content, createdAt, author }) {
   return (
@@ -19,7 +19,8 @@ function Post ({ _id, title, summary, cover, content, createdAt, author }) {
         </Link>
         <p className='info'>
           <a href='/' className='author'>
-            {author.username}
+            {' '}
+            -by @{author.username}
           </a>
           {/* <time>{format(createdAt, 'MMM, d, yyyy')}</time> */}
           <time>{formatISO9075(createdAt)}</time>

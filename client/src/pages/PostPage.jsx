@@ -57,6 +57,10 @@ function PostPage () {
                   `https://hamza-blog-server.onrender.com/post/${postInfo._id}`,
                   {
                     method: 'DELETE',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      Authorization: `Bearer ${localStorage.getItem('token')}`
+                    },
                     credentials: 'include'
                   }
                 ).then(() => {

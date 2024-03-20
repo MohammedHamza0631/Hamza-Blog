@@ -34,6 +34,9 @@ function EditPost () {
     }
     await fetch('https://hamza-blog-server.onrender.com/post', {
       method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
       body: data,
       credentials: 'include'
     })

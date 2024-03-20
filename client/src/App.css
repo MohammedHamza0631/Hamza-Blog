@@ -69,7 +69,17 @@ div.posts p.summary {
   margin: 10px 0;
   line-height: 1.1rem;
 }
-
+.error {
+  max-width: fit-content;
+  font-weight: 600;
+  background-color: #fdd;
+  border: 1px solid #d00;
+  border-radius: 10px;
+  color: #d00;
+  text-align: center;
+  padding: 8px;
+  margin: auto auto 20px;
+}
 form .login,
 form .register {
   max-width: 400px;
@@ -140,11 +150,11 @@ div.post-page a {
   color: #333;
   text-decoration: underline;
 }
-div.post-page .button-row {
+div.button-row {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin: 10px 0;
+  gap: 20px;
+  margin: 20px 0;
 }
 div.edit-row {
   text-align: center;
@@ -170,9 +180,9 @@ div.delete-row {
   margin: 20px 0;
 }
 div.post-page a.delete-btn {
-  background-color: #d00000ca;
+  background-color: #d00;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 12px;
   border-radius: 8px;
   font-size: 1em;
   display: inline-flex;
@@ -182,11 +192,7 @@ div.post-page a.delete-btn {
   transition: 0.3s;
 }
 div.post-page a.delete-btn:hover {
-  background-color: #d00;
-}
-div.post-page div.content {
-  line-height: 1.7rem;
-  margin-bottom: 20px;
+  background-color: #d00000c2;
 }
 a svg {
   height: 21px;

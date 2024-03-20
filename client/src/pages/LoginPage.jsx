@@ -8,6 +8,7 @@ const LoginPage = () => {
   const [redirect, setRedirect] = useState(false)
   const { setuserInfo } = useContext(UserContext)
   const cursorRef = useRef()
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     cursorRef.current.focus()
@@ -15,22 +16,28 @@ const LoginPage = () => {
 
   async function login (e) {
     e.preventDefault()
-    const response = await fetch(
-      'https://hamza-blog-server.onrender.com/login',
-      {
-        method: 'POST',
-        body: JSON.stringify({ username, password }),
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include'
+    try {
+      const response = await fetch(
+        'https://hamza-blog-server.onrender.com/login',
+        {
+          method: 'POST',
+          body: JSON.stringify({ username, password }),
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include'
+        }
+      )
+
+      if (!response.ok) {
+        const errorData = await response.json() // Try to get error data
+        throw new Error(errorData.error || 'Unknown error. Please try again.')
       }
-    )
-    if (response.ok) {
-      response.json().then(userInfo => {
-        setuserInfo(userInfo)
-        setRedirect(true)
-      })
-    } else {
-      alert('Wrong Credentials')
+
+      const userInfo = await response.json()
+      setuserInfo(userInfo)
+      localStorage.setItem('token', userInfo.token)
+      setRedirect(true)
+    } catch (error) {
+      setError(error)
     }
   }
 
@@ -40,6 +47,7 @@ const LoginPage = () => {
   return (
     <form className='login' onSubmit={login}>
       <h1>Login</h1>
+      {error && <div className='error'>{error.message}</div>}
       <input
         type='text'
         placeholder='Username'
