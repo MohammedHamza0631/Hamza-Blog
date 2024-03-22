@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import Editor from '../components/Editor'
+import toast from 'react-hot-toast'
 
 function EditPost () {
   const { id } = useParams()
@@ -41,6 +42,16 @@ function EditPost () {
       credentials: 'include'
     })
     setRedirect(true)
+    toast.promise(
+      fetch('https://hamza-blog-server.onrender.com/post/' + id).then(
+        response => response.json()
+      ),
+      {
+        loading: 'Updating post...',
+        success: 'Post updated successfully!',
+        error: 'Error updating post. Please try again.'
+      }
+    )
   }
 
   if (redirect) {

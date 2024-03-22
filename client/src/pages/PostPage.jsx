@@ -2,14 +2,14 @@ import { formatISO9075 } from 'date-fns'
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams, Navigate } from 'react-router-dom'
 import { UserContext } from '../UserContext'
-
+import toast from 'react-hot-toast'
 function PostPage () {
   const { id } = useParams()
   const [postInfo, setPostInfo] = useState(null)
   const [redirectt, setRedirect] = useState(false)
   const { userInfo } = useContext(UserContext)
   useEffect(() => {
-    fetch(`https://hamza-blog-server.onrender.com/post/${id}`).then(res => {
+    fetch(`http://localhost:4000/post/${id}`).then(res => {
       res.json().then(postInfo => {
         setPostInfo(postInfo)
       })
@@ -53,19 +53,27 @@ function PostPage () {
             <Link
               className='delete-btn'
               onClick={() => {
-                fetch(
-                  `https://hamza-blog-server.onrender.com/post/${postInfo._id}`,
-                  {
-                    method: 'DELETE',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      Authorization: `Bearer ${localStorage.getItem('token')}`
-                    },
-                    credentials: 'include'
-                  }
-                ).then(() => {
-                  // window.location.replace('/')
+                fetch(`http://localhost:4000/post/${postInfo._id}`, {
+                  method: 'DELETE',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                  },
+                  credentials: 'include'
+                }).then(() => {
                   setPostInfo(null)
+                  toast.success('Post Deleted Successfully.', {
+                    style: {
+                      border: '1px solid #fdd',
+                      padding: '8px',
+                      background: '#fdd',
+                      color: '#d00'
+                    },
+                    iconTheme: {
+                      primary: '#d00',
+                      secondary: '#fdd'
+                    }
+                  })
                   setRedirect(true)
                 })
               }}
@@ -90,10 +98,7 @@ function PostPage () {
         </div>
       )}
       <div className='image'>
-        <img
-          src={`https://hamza-blog-server.onrender.com/${postInfo.cover}`}
-          alt=''
-        />
+        <img src={`http://localhost:4000/${postInfo.cover}`} alt='' />
       </div>
       <div
         className='content'

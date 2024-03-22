@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { UserContext } from '../UserContext'
+import toast from 'react-hot-toast'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('')
@@ -17,15 +18,12 @@ const LoginPage = () => {
   async function login (e) {
     e.preventDefault()
     try {
-      const response = await fetch(
-        'https://hamza-blog-server.onrender.com/login',
-        {
-          method: 'POST',
-          body: JSON.stringify({ username, password }),
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include'
-        }
-      )
+      const response = await fetch('http://localhost:4000/login', {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+      })
 
       if (!response.ok) {
         const errorData = await response.json() // Try to get error data
@@ -35,9 +33,22 @@ const LoginPage = () => {
       const userInfo = await response.json()
       setuserInfo(userInfo)
       localStorage.setItem('token', userInfo.token)
+      toast.success('You are now Logged in!', {
+        style: {
+          background: '#333',
+          color: '#fff'
+        }
+      })
       setRedirect(true)
     } catch (error) {
       setError(error)
+      toast.error(error.message, {
+        style: {
+          background: '#fdd',
+          color: '#d00'
+        }
+      })
+      
     }
   }
 
@@ -47,7 +58,7 @@ const LoginPage = () => {
   return (
     <form className='login' onSubmit={login}>
       <h1>Login</h1>
-      {error && <div className='error'>{error.message}</div>}
+
       <input
         type='text'
         placeholder='Username'

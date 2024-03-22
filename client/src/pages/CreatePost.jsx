@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import Editor from '../components/Editor'
+import toast from 'react-hot-toast'
 
 function CreatePost () {
   const [title, setTitle] = useState('')
@@ -36,6 +37,12 @@ function CreatePost () {
     if (response.ok) {
       setRedirect(true)
     }
+
+    toast.promise(response.json(), {
+      loading: 'Creating post...',
+      success: 'Post created successfully!',
+      error: 'Error creating post. Please try again.'
+    })
   }
   if (redirect) {
     return <Navigate to={'/'} />
