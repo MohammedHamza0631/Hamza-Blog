@@ -17,12 +17,15 @@ const RegisterPage = () => {
   async function register (e) {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:4000/register', {
-        method: 'POST',
-        body: JSON.stringify({ username, password }),
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include'
-      })
+      const response = await fetch(
+        'https://hamza-blog-server.onrender.com/register',
+        {
+          method: 'POST',
+          body: JSON.stringify({ username, password }),
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include'
+        }
+      )
 
       if (!response.ok) {
         const errorData = await response.json()

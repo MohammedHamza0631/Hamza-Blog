@@ -9,7 +9,7 @@ function PostPage () {
   const [redirectt, setRedirect] = useState(false)
   const { userInfo } = useContext(UserContext)
   useEffect(() => {
-    fetch(`http://localhost:4000/post/${id}`).then(res => {
+    fetch(`https://hamza-blog-server.onrender.com/post/${id}`).then(res => {
       res.json().then(postInfo => {
         setPostInfo(postInfo)
       })
@@ -53,14 +53,17 @@ function PostPage () {
             <Link
               className='delete-btn'
               onClick={() => {
-                fetch(`http://localhost:4000/post/${postInfo._id}`, {
-                  method: 'DELETE',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                  },
-                  credentials: 'include'
-                }).then(() => {
+                fetch(
+                  `https://hamza-blog-server.onrender.com/post/${postInfo._id}`,
+                  {
+                    method: 'DELETE',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      Authorization: `Bearer ${localStorage.getItem('token')}`
+                    },
+                    credentials: 'include'
+                  }
+                ).then(() => {
                   setPostInfo(null)
                   toast.success('Post Deleted Successfully.', {
                     style: {
@@ -98,7 +101,10 @@ function PostPage () {
         </div>
       )}
       <div className='image'>
-        <img src={`http://localhost:4000/${postInfo.cover}`} alt='' />
+        <img
+          src={`https://hamza-blog-server.onrender.com/${postInfo.cover}`}
+          alt=''
+        />
       </div>
       <div
         className='content'
