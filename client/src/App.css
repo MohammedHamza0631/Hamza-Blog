@@ -32,6 +32,8 @@ header a:hover {
 header a.logo {
   font-size: 2em;
   font-weight: bold;
+  /* Give a monotype corosiva font*/
+  font-family: 'Monotype Corsiva', sans-serif;
 }
 header nav {
   font-size: 1.2em;

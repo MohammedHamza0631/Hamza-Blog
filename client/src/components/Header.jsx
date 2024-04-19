@@ -1,24 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../UserContext'
 
 function Header () {
   const { userInfo, setuserInfo } = useContext(UserContext)
   const [redirect, setRedirect] = useState(false)
+  const navigate = useNavigate()
   const [error, setError] = useState(null)
 
-  // useEffect(() => {
-  //   fetch('https://hamza-blog-server.onrender.com/profile', {
-  //     credentials: 'include',
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.getItem('token')}`
-  //     }
-  //   }).then(res => {
-  //     res.json().then(userInfo => {
-  //       setuserInfo(userInfo)
-  //     })
-  //   })
-  // }, [])
+
   useEffect(() => {
     const fetchProfile = async () => {
       const storedToken = localStorage.getItem('token')
@@ -48,15 +38,6 @@ function Header () {
     fetchProfile()
   }, [])
 
-  // function logout () {
-  //   fetch('https://hamza-blog-server.onrender.com/logout', {
-  //     credentials: 'include',
-  //     method: 'POST'
-  //   }).then(() => {
-  //     window.location.replace('/')
-  //     setuserInfo(null)
-  //   })
-  // }
   function logout () {
     fetch('https://hamza-blog-server.onrender.com/logout', {
       // You don't need to send back the token for logging out...
@@ -65,7 +46,8 @@ function Header () {
     }).then(() => {
       localStorage.removeItem('token') // Clear the token from localStorage
       setuserInfo(null)
-      window.location.replace('/')
+      // window.location.replace('/')
+      navigate('/')
     })
   }
   if (error) {
@@ -76,7 +58,7 @@ function Header () {
   return (
     <header>
       <Link to='/' className='logo'>
-        MyBlog
+        HB
       </Link>
       <nav>
         {username && (
