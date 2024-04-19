@@ -31,7 +31,7 @@ header a:hover {
 }
 header a.logo {
   font-size: 2em;
-  font-weight: 400;
+  font-weight: bold;
   /* Give a monotype corosiva font*/
   font-family: "Great Vibes", cursive;
   font-style: normal;
