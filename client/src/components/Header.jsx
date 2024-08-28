@@ -14,7 +14,7 @@ function Header () {
       if (storedToken) {
         try {
           const response = await fetch(
-            'https://hamza-blog-server.vercel.app/profile',
+            'https://hamza-blog-server.onrender.com/profile',
             {
               credentials: 'include',
               headers: {
@@ -38,7 +38,7 @@ function Header () {
   }, [])
 
   function logout () {
-    fetch('https://hamza-blog-server.vercel.app/logout', {
+    fetch('https://hamza-blog-server.onrender.com/logout', {
       // You don't need to send back the token for logging out...
       credentials: 'include',
       method: 'POST'

@@ -19,7 +19,7 @@ const LoginPage = () => {
     e.preventDefault()
     try {
       const response = await fetch(
-        'https://hamza-blog-server.vercel.app/login',
+        'https://hamza-blog-server.onrender.com/login',
         {
           method: 'POST',
           body: JSON.stringify({ username, password }),

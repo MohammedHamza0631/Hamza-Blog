@@ -12,13 +12,15 @@ function EditPost () {
   const [redirect, setRedirect] = useState(false)
 
   useEffect(() => {
-    fetch('https://hamza-blog-server.vercel.app/post/' + id).then(response => {
-      response.json().then(postInfo => {
-        setTitle(postInfo.title)
-        setContent(postInfo.content)
-        setSummary(postInfo.summary)
-      })
-    })
+    fetch('https://hamza-blog-server.onrender.com/post/' + id).then(
+      response => {
+        response.json().then(postInfo => {
+          setTitle(postInfo.title)
+          setContent(postInfo.content)
+          setSummary(postInfo.summary)
+        })
+      }
+    )
   }, [id])
 
   async function updatePost (e) {
@@ -31,7 +33,7 @@ function EditPost () {
     if (files?.[0]) {
       data.set('file', files?.[0])
     }
-    await fetch('https://hamza-blog-server.vercel.app/post', {
+    await fetch('https://hamza-blog-server.onrender.com/post', {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -41,8 +43,8 @@ function EditPost () {
     })
     setRedirect(true)
     toast.promise(
-      fetch('https://hamza-blog-server.vercel.app/post/' + id).then(response =>
-        response.json()
+      fetch('https://hamza-blog-server.onrender.com/post/' + id).then(
+        response => response.json()
       ),
       {
         loading: 'Updating post...',

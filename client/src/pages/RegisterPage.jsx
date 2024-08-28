@@ -18,7 +18,7 @@ const RegisterPage = () => {
     e.preventDefault()
     try {
       const response = await fetch(
-        'https://hamza-blog-server.vercel.app/register',
+        'https://hamza-blog-server.onrender.com/register',
         {
           method: 'POST',
           body: JSON.stringify({ username, password }),
