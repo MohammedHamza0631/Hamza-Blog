@@ -7,7 +7,7 @@ function Post ({ _id, title, summary, cover, content, createdAt, author }) {
       <div className='image'>
         <Link to={`/post/${_id}`}>
           <img
-            src={'https://hamza-blog-server.onrender.com/' + cover}
+            src={'https://hamza-blog-server.vercel.app/' + cover}
             alt='postImage'
           />
         </Link>

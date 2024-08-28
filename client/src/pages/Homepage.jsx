@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Post from '../components/Post'
 const Homepage = () => {
   const [posts, setPosts] = useState([])
+
   useEffect(() => {
-    fetch('https://hamza-blog-server.onrender.com/post').then(res => {
+    fetch('https://hamza-blog-server.vercel.app/post').then(res => {
       res.json().then(posts => {
         setPosts(posts)
       })

@@ -9,7 +9,7 @@ function PostPage () {
   const [redirectt, setRedirect] = useState(false)
   const { userInfo } = useContext(UserContext)
   useEffect(() => {
-    fetch(`https://hamza-blog-server.onrender.com/post/${id}`).then(res => {
+    fetch(`https://hamza-blog-server.vercel.app/post/${id}`).then(res => {
       res.json().then(postInfo => {
         setPostInfo(postInfo)
       })
@@ -54,7 +54,7 @@ function PostPage () {
               className='delete-btn'
               onClick={() => {
                 fetch(
-                  `https://hamza-blog-server.onrender.com/post/${postInfo._id}`,
+                  `https://hamza-blog-server.vercel.app/post/${postInfo._id}`,
                   {
                     method: 'DELETE',
                     headers: {
@@ -102,7 +102,7 @@ function PostPage () {
       )}
       <div className='image'>
         <img
-          src={`https://hamza-blog-server.onrender.com/${postInfo.cover}`}
+          src={`https://hamza-blog-server.vercel.app/${postInfo.cover}`}
           alt=''
         />
       </div>
